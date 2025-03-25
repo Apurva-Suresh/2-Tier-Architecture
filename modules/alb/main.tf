@@ -23,8 +23,8 @@ resource "aws_lb_target_group" "twot_tg" {
   health_check {
    enabled = true
    healthy_threshold = 5
-   interval = 30
-   path = "/"
+   interval = 300
+   path = "/index.html"
    port = "traffic-port"
    protocol = "HTTP"
    matcher = "200"
@@ -56,4 +56,3 @@ resource "aws_lb_listener" "twot_listener" {
     target_group_arn = aws_lb_target_group.twot_tg.arn
   }
 }
-
