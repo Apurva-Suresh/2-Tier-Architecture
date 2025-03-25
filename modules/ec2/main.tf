@@ -2,7 +2,7 @@
 #Public key - utilized by EC2
 resource "aws_key_pair" "TF-key" {
   key_name   = "TF-key"
-  public_key = tls_private_key.ed25519-tf.public_key_pem
+  public_key = tls_private_key.ed25519-tf.public_key_openssh
 }
 # ED25519 key (Private Key)
 resource "tls_private_key" "ed25519-tf" {
@@ -26,13 +26,17 @@ resource "aws_instance" "webserver1" {
   tenancy                     = "default"
   
   user_data = <<EOF
-  #! /bin/bash
-  sudo apt-get update
-  sudo apt-get install -y apache2
-  sudo systemctl start apache2
-  sudo systemctl enable apache2
-  echo "This is server 1" > /var/www/html/index.html
+#!/bin/bash
+sudo apt-get update
+sudo apt-get install -y apache2
+sudo systemctl start apache2
+sudo systemctl enable apache2
+echo "This is server 1" > /var/www/html/index.html
 EOF
+
+tags = {
+    Name = "Webserver1"
+  }
 }
 
 resource "aws_instance" "webserver2" {
@@ -46,11 +50,15 @@ resource "aws_instance" "webserver2" {
   tenancy                     = "default"
   
   user_data = <<EOF
-  #! /bin/bash
-  sudo apt-get update
-  sudo apt-get install -y apache2
-  sudo systemctl start apache2
-  sudo systemctl enable apache2
-  echo "This is server 2" > /var/www/html/index.html
+#!/bin/bash
+sudo apt-get update
+sudo apt-get install -y apache2
+sudo systemctl start apache2
+sudo systemctl enable apache2
+echo "This is server 2" > /var/www/html/index.html
 EOF
+
+  tags = {
+    Name = "Webserver2"
+  }
 }
