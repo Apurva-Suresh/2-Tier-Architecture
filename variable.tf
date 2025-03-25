@@ -6,15 +6,6 @@ variable "prisub1_cidr" {}
 variable "prisub2_cidr" {}
 variable "ami_id" {}
 variable "instance_type" {}
-variable "alb_sg" {}
-variable "pubsub_1" {}
-variable "pubsub_2" {}
-variable "public_sg" {}
-variable "vpc_id" {}
-variable "webserver1" {}
-variable "webserver2" {}
-variable "prisub_1" {}
-variable "prisub_2" {}
 variable "db_name" {}
 variable "engine" {}
 variable "engine_version" {}
@@ -24,4 +15,3 @@ variable "identifier" {}
 variable "db_username" {}
 variable "db_password" {}
 variable "parameter_group_name" {}
-variable "db_sg" {}
